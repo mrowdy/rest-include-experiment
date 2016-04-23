@@ -1,8 +1,15 @@
-import migrate from './migration';
-import sqlite3 from 'sqlite3';
+import {db} from './db';
+import express from 'express';
+import getCategory from './handler/getCategory';
+import getArticles from './handler/getArticles';
 
-var db = new sqlite3.Database('res/db.sqlite');
+const port = process.env.PORT || 1337;
 
-migrate(db);
+let app = express();
+let router = express.Router();
 
-db.close();
+router.get('/article', getArticles);
+router.get('/article/:id/category', getCategory);
+
+app.use('/', router);
+app.listen(port);

@@ -4,11 +4,15 @@
   "description": "",
   "main": "bin/start-included.js",
   "scripts": {
-    "start": "babel -d lib/ src/ && node lib/start-included.js"
+    "start": "babel -d lib/ src/ && node lib/start-included.js",
+    "migrate": "babel -d lib/ src/ && node lib/migration.js"
+
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "async": "^2.0.0-rc.3",
+    "express": "^4.13.4",
     "sqlite3": "^3.1.3"
   },
   "devDependencies": {
