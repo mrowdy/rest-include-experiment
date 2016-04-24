@@ -13,5 +13,5 @@ let router = express.Router();
 router.get('/article', getArticles);
 router.get('/article/:id/category', getCategory);
 
-app.use('/', router);
+app.use(config.base, router);
 app.listen(port);
