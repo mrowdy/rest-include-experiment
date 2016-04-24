@@ -2,9 +2,10 @@ import {db} from './db';
 import express from 'express';
 import getCategory from './handler/getCategory';
 import getArticles from './handler/getArticles';
-import {api} from './api';
+import config from '../config.json';
 
-const port = process.env.PORT || api.port;
+const port = process.env.PORT || config.port;
+
 
 let app = express();
 let router = express.Router();

@@ -1,9 +1,5 @@
-export var api = {
-    protocol: "http",
-    host: "localhost",
-    port: 1337
-}
+import config from '../config.json';
 
 export function baseUrl(){
-    return api.protocol + '://' + api.host + ':' + api.port;
+    return config.protocol + '://' + config.host + ':' + config.port;
 }
