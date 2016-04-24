@@ -1,17 +1,14 @@
 {
-  "name": "rest-includes",
+  "name": "rest-include-experiment",
   "version": "0.1.0",
-  "description": "",
-  "main": "bin/start-included.js",
+  "description": "an experiment about includes inside REST endpoints",
+  "main": "src/app.js",
   "scripts": {
-    "start": "babel -d lib/ src/ && node lib/start-included.js",
-    "migrate": "babel -d lib/ src/ && node lib/migration.js"
-
+    "start": "babel -d lib/ src/ && node lib/app.js"
   },
-  "author": "",
-  "license": "MIT",
+  "author": "slemgrim",
+  "license": "WTFPL-2.0",
   "dependencies": {
-    "async": "^2.0.0-rc.3",
     "express": "^4.13.4",
     "sqlite3": "^3.1.3"
   },
