@@ -2,8 +2,8 @@ Install
 ---
 
 ```
-    npm install
-    cp config-sample.json config.json
+npm install
+cp config-sample.json config.json
 ```
 
 overwrite your config
@@ -11,14 +11,25 @@ overwrite your config
 Run
 ---
 
-```npm run start``` 
+```
+npm run start
+``` 
 
 Endpoints
 ---
 
-```js
-/article // list of all articles
-/article?include=1 //list of all articles with included categories
-
-/article/[x]/category // category of a specific article
+List of all articles
 ```
+/article
+```
+
+List of all articles with included categories
+```
+/article?include=1
+``` 
+
+Category of a specific article
+```
+/article/[x]/category
+``` 
+
