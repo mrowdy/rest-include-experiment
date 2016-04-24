@@ -31,7 +31,6 @@ function getCategorySchemas(rows){
 }
 
 function getRelatedCategories(articles, callback){
-    console.log(articles);
     let categoryIds = [];
     articles.forEach((article) => {
         categoryIds.push(article.relationships.category.data.id);
