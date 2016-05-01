@@ -3,6 +3,7 @@ import express from 'express';
 import getCategory from './handler/getCategory';
 import getArticles from './handler/getArticles';
 import config from '../config.json';
+import {cache} from './cache';
 
 const port = process.env.PORT || 3000;
 

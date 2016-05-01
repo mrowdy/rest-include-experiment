@@ -1,6 +1,7 @@
 import url from 'url';
 import {getAllArticles} from '../models/article';
 import {getCategoryFromIds} from '../models/category';
+import {cache} from '../cache';
 
 import articleSchema from '../schemas/article';
 import categorySchema from '../schemas/category';
@@ -12,6 +13,10 @@ function getQueryString(req){
 
 function includeCategories(req){
     return getQueryString(req).include == true;
+}
+
+function fromCache(req){
+    return getQueryString(req).cache == true;
 }
 
 function getArticleSchemas(rows){
@@ -55,14 +60,42 @@ function respond(res, data){
 }
 
 export default function(req, res) {
+    if(fromCache(req)) {
+        cache.get('articlesa', (err, reply) => {
+            if(!reply) {
+                getArticles((articles) => {
+                   cache.set('articlesa', JSON.stringify(articles));
+                   respond(res, articles);
+                });
+            } else {
+                respond(res, JSON.parse(reply));
+            }
+        });
+    } else if(includeCategories(req)) {
+        getArticlesWithCategory((data) => {
+            respondWithIncluded(res, data.articles, data.categories);
+        })
+    } else {
+        getArticles((articles) => {
+            respond(res, articles);
+        });
+    }
+}
+
+function getArticles(callback){
+    getAllArticles((rows) => {
+        callback(getArticleSchemas(rows));
+    });
+}
+
+function getArticlesWithCategory(callback){
     getAllArticles((rows) => {
         let articles = getArticleSchemas(rows);
-        if(includeCategories(req)) {
-            getRelatedCategories(articles, (categories) => {
-                respondWithIncluded(res, articles, categories);
-            });
-        } else {
-            respond(res, articles)
-        }
+        getRelatedCategories(articles, (categories) => {
+           callback({
+               'articles': articles,
+               'categories': categories
+           });
+        });
     });
 }
