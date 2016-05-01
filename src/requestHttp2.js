@@ -1,11 +1,15 @@
 import http2 from 'http2';
+import url from 'url';
 
-export default function (url, callback) {
+const agent = new http2.Agent({ keepAlive: true });
 
-    var request = http2.get(url);
+export default function (rawUrl, callback) {
+
+    let options = url.parse(rawUrl);
+    options.agent = agent;
 
     // Receiving the response
-    request.on('response', function (res) {
+    let req = http2.request(options, function (res) {
         let body = '';
         res.setEncoding('utf8');
         res.on('data', (chunk) => {
@@ -15,5 +19,6 @@ export default function (url, callback) {
             callback(JSON.parse(body).data);
         });
     });
+    req.end();
 }
 

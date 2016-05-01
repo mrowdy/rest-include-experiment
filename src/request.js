@@ -1,4 +1,4 @@
-import http from 'http';
+import http from 'https';
 
 export default function(url, callback){
     http.request(url, function(res) {

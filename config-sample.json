@@ -2,5 +2,9 @@
   "protocol": "http",
   "host": "localhost",
   "port": 1337,
-  "base": "/"
+  "base": "/",
+  "examples": {
+    "https": "",
+    "http2": ""
+  }
 }

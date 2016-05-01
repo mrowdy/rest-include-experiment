@@ -1,9 +1,11 @@
 import request from '../requestHttp2';
+import config from '../../config.json';
 
+console.log('##### HTTP2 WITHOUT INCLUDES START #####');
 console.time('all');
 console.time('articles');
 
-request('https://slemgrim.com/include/article', (data) => {
+request(config.examples.http2, (data) => {
     let toLoad = data.length;
     data.forEach((article, index) => {
         console.time('category' + index);
@@ -20,5 +22,6 @@ request('https://slemgrim.com/include/article', (data) => {
 
 function end(){
     console.timeEnd('all');
+    console.log('##### HTTP2 WITHOUT INCLUDES END#####');
     process.exit();
 }

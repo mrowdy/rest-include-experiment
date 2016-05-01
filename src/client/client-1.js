@@ -1,9 +1,11 @@
 import request from '../request';
+import config from '../../config.json';
 
+console.log('##### HTTP WITHOUT INCLUDES START #####');
 console.time('all');
 console.time('articles');
 
-request('http://http1.slemgrim.com:3001/article', (data) => {
+request(config.examples.https, (data) => {
     let toLoad = data.length;
     data.forEach((article, index) => {
         console.time('category' + index);
@@ -21,7 +23,7 @@ request('http://http1.slemgrim.com:3001/article', (data) => {
 
 function end(){
     console.timeEnd('all');
+    console.log('##### HTTP WITHOUT INCLUDES END #####');
+    process.exit();
 }
-
-
 
